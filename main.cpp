@@ -4,7 +4,9 @@
 
 int main() {
 
-    Calendar today = Calendar(true);
-    std::cout << today << std::endl;
+    std::cout << leap_year(1900) << " == 0" << std::endl;
+    std::cout << leap_year(1600) << " == 1" << std::endl;
+    std::cout << leap_year(2004) << " == 1" << std::endl;
+    std::cout << leap_year(2005) << " == 0" << std::endl;
     return 0;
 }

@@ -1,10 +1,10 @@
 #include "Calendar.h"
 
 Calendar::Calendar(int year, int month, int day, bool display_english) {
-        year_ = year;
-        month_ = month;
-        day_ = day;
-        display_in_English_ = display_english;
+    year_ = year;
+    month_ = month;
+    day_ = day;
+    display_in_English_ = display_english;
 }
 
 Calendar::Calendar(bool display_english) {
@@ -25,4 +25,11 @@ std::ostream & operator<<(std::ostream & os, const Calendar & c) {
     }
     return os;
 
+}
+
+bool leap_year(int year) {
+    if (year % 4 == 0) {
+        return year % 100 != 0 || year % 400 == 0;
+    }
+    return false;
 }
