@@ -43,7 +43,7 @@ private:
     bool display_in_English_;
 };
 
-3// print calendar date, if displaysEnglish() returns true will write month
+// print calendar date, if displaysEnglish() returns true will write month
 // out in English
 std::ostream & operator<<(std::ostream & os, const Calendar & c);
 

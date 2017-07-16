@@ -46,7 +46,7 @@ int day_count(int month, int year) {
             return 29;
         }
         return 28;
-    } if (month < 7) {// August and July has the same value 
+    } if (month < 7) {// August and July has the same value
         if (month % 2 == 0) {
             return 31;
         }
