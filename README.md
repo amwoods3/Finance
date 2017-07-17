@@ -9,6 +9,6 @@ Add tests for:
 
 Add functionality:
     Ability for Calendar to tell difference in two dates (how many days apart)
-
+    For testing, add ability to verbose testing results and what is being tested
 
 
