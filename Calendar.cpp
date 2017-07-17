@@ -23,6 +23,49 @@ Calendar::Calendar(bool display_english) {
         
 }
 
+Calendar::Calendar(int day_value, bool display_english) {
+    int dv = 0;
+    year_ = 0;
+    month_ = 0;
+    if (day_value > 0) {
+        int days_in_this_year = 366;
+        while (dv + days_in_this_year <= day_value) {
+            dv += days_in_this_year;
+            year_ += 1;
+            days_in_this_year = (leap_year(year_) ? 366 : 365);
+        }
+        int days_in_this_month = 31;
+        while (dv + days_in_this_month < day_value) {
+            dv += days_in_this_month;
+            month_ += 1;
+            days_in_this_month = day_count(month_, year_);
+        }
+        day_ = day_value - dv + 1;
+    } else if (day_value < 0) {
+        int days_in_this_year = 365;
+        while (dv - days_in_this_year > day_value) {
+            dv -= days_in_this_year;
+            year_ -= 1;
+            days_in_this_year = (leap_year(year_ - 1) ? 366 : 365);
+        }
+        // go back one more year to be able to go up...
+        dv -= days_in_this_year;
+        year_ -= 1;
+        int days_in_this_month = 31;
+        while (dv + days_in_this_month < day_value) {
+            dv += days_in_this_month;
+            month_ += 1;
+            days_in_this_month = day_count(month_, year_);
+        }
+        day_ = day_value - dv + 1;
+    } else {
+        day_ = 1;
+    }
+
+    display_in_English_ = display_english;
+    day_value_ = day_value;
+}
+
 
 std::ostream & operator<<(std::ostream & os, const Calendar & c) {
     if (c.displaysEnglish()) {

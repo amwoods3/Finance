@@ -11,4 +11,6 @@ bool test_day_count();
 
 // tests for day_values of various year, month, and day
 bool test_day_value_of();
+
+bool test_day_value_constructor();
 #endif

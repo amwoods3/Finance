@@ -20,9 +20,10 @@ class MonthError: private std::exception {};
 class Calendar {
 public:
     Calendar(int year, int month, int day, bool display_english=false);
-
     Calendar(bool display_english=false);
 
+    // Get a day with a certain day_value
+    Calendar(int day_value, bool display_english=false);
     int year() const {
         return year_;
     }
@@ -33,6 +34,10 @@ public:
 
     int day() const {
         return day_;
+    }
+
+    int day_value() const {
+        return day_value_;
     }
 
     int displaysEnglish() const {

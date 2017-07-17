@@ -97,3 +97,17 @@ bool test_day_value_of() {
 
     return true;
 }
+
+
+bool test_day_value_constructor() {
+    for (int day = -500000; day < 500000; ++day) {
+        Calendar test_calendar = Calendar(day);
+        if (day_value_of(test_calendar.year(),
+                         test_calendar.month(),
+                         test_calendar.day()) != test_calendar.day_value()) {
+            std::cout << "test_day_value_constructor() on day " << day << " failed\n";
+            return false;
+        }
+    }
+    return true;
+}
