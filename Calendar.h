@@ -12,7 +12,7 @@
  */
 
 const std::string months[] = {"January", "February", "March", "April",
-                              "May", "June", "July", "September", "October",
+                              "May", "June", "July", "August", "September", "October",
                               "November", "December"};
 
 class MonthError: private std::exception {};
@@ -44,6 +44,11 @@ public:
         return display_in_English_;
     }
 
+    int days_from(const Calendar & c) const;
+
+    void state_days_from(const Calendar & c) const;
+
+    void go_to_next_day();
 private:
     int year_;
     int month_;

@@ -13,4 +13,8 @@ bool test_day_count();
 bool test_day_value_of();
 
 bool test_day_value_constructor();
+
+bool test_go_to_next_day();
+
+bool test_constructor_int_int_int();
 #endif

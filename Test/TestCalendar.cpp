@@ -98,9 +98,8 @@ bool test_day_value_of() {
     return true;
 }
 
-
 bool test_day_value_constructor() {
-    for (int day = -500000; day < 500000; ++day) {
+    for (int day = -50000; day < 50000; ++day) {
         Calendar test_calendar = Calendar(day);
         if (day_value_of(test_calendar.year(),
                          test_calendar.month(),
@@ -108,6 +107,25 @@ bool test_day_value_constructor() {
             std::cout << "test_day_value_constructor() on day " << day << " failed\n";
             return false;
         }
+    }
+    return true;
+}
+
+bool test_go_to_next_day() {
+    Calendar c1 = Calendar(0, 11, 31);
+    c1.go_to_next_day();
+    if (c1.year() != 1 || c1.month() != 0 || c1.day() != 1) {
+        std::cout << "Failed to wrap year on go_to_next_day()" << std::endl;
+        std::cout << c1 << std::endl;
+        return false;
+    }
+    Calendar c2 = Calendar(0, 1, 28);
+    c2.go_to_next_day();
+    if (c2.year() != 0 || c2.month() != 1 || c2.day() != 29) {
+        std::cout << "Failed to account for leap year in go_to_next_day()"
+                  << std::endl;
+        std::cout << c2 << std::endl;
+        return false;
     }
     return true;
 }

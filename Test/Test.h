@@ -23,6 +23,7 @@ void test() {
         assert(test_day_count());
         assert(test_day_value_of());
         assert(test_day_value_constructor());
+        assert(test_go_to_next_day());
         std::cout << "All tests passed!" << std::endl;
     } catch(AssertionError e) {
         std::cout << "Tests failed\n";

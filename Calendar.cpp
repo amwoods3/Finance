@@ -7,6 +7,7 @@ Calendar::Calendar(int year, int month, int day, bool display_english) {
         MonthError me;
         throw me;
     }
+    month_ = month;
     day_ = day;
     day_value_ = day_value_of(year_, month_, day_);
     display_in_English_ = display_english;
@@ -66,6 +67,35 @@ Calendar::Calendar(int day_value, bool display_english) {
     day_value_ = day_value;
 }
 
+
+int Calendar::days_from(const Calendar & c) const {
+    return c.day_value() - day_value();
+}
+
+void Calendar::state_days_from(const Calendar & c) const {
+    int d = days_from(c);
+    if (d > 0) {
+        std::cout << *(this) << " is " << d << " days before " << c << std::endl;
+    } else if (d < 0) {
+        std::cout << *(this) << " is " << -d << " days after " << c << std::endl;
+    } else {
+        std::cout << *(this) << " is the same day as " << c << std::endl;
+    }
+}
+
+void Calendar::go_to_next_day() {
+    if (day_ < day_count(month_, year_)) {
+        day_++;
+    } else {
+        month_++;
+        day_ = 1;
+        if (month_ >= 12) {
+            year_ += 1;
+            month_ = 0;
+        }
+    }
+    day_value_ += 1;
+}
 
 std::ostream & operator<<(std::ostream & os, const Calendar & c) {
     if (c.displaysEnglish()) {
