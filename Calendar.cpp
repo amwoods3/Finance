@@ -99,10 +99,19 @@ void Calendar::go_to_next_day() {
 
 std::ostream & operator<<(std::ostream & os, const Calendar & c) {
     if (c.displaysEnglish()) {
-        os << months[c.month()] << " " << c.day() << ", " << c.year();
+        os << months[c.month()] << " " << c.day() << ", ";
+        if (c.year() >= 0) {
+            os << c.year();
+        } else {
+            os << -c.year() << " B.C.E";
+        }
     } else {
         // month is one less than how humans write so we add 1 to it.
-        os << c.year() << "/" << c.month() + 1 << "/" << c.day();
+        if (c.year() >= 0) {
+            os << c.year() << "/" << c.month() + 1 << "/" << c.day();
+        } else {
+            os << "B.C.E " << -c.year() << "/" << c.month() + 1 << "/" << c.day();
+        }
     }
     return os;
 
