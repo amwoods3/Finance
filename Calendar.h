@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include <ctime>
 
 /*
@@ -13,6 +14,8 @@
 const std::string months[] = {"January", "February", "March", "April",
                               "May", "June", "July", "September", "October",
                               "November", "December"};
+
+class MonthError: private std::exception {};
 
 class Calendar {
 public:
@@ -40,6 +43,7 @@ private:
     int year_;
     int month_;
     int day_;
+    int day_value_;
     bool display_in_English_;
 };
 
@@ -50,5 +54,6 @@ std::ostream & operator<<(std::ostream & os, const Calendar & c);
 // returns true if a given year is a leap year. returns false otherwise
 bool leap_year(int year);
 int day_count(int month, int year);
+int day_value_of(int year, int month, int day);
 
 #endif
