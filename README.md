@@ -6,7 +6,6 @@ able to work on this with me, so it is pretty much a solo project.
 
 TODO:
 Add tests for:
-    day_count
 
 Add functionality:
     Ability for Calendar to tell difference in two dates (how many days apart)

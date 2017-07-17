@@ -20,6 +20,7 @@ void assert(bool v) {
 void test() {
     try {
         assert(test_leap_year());
+        assert(test_day_count());
         std::cout << "All tests passed!" << std::endl;
     } catch(AssertionError e) {
         std::cout << "Tests failed\n";
