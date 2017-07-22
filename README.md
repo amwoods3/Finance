@@ -13,8 +13,8 @@ TODO:
 Add tests for:
 
 Add functionality:
-    For testing, add ability to verbose testing results and what is being tested
-
-Something to Think on:
-    Given how much spent over time figure out the average spending, ignoring
-    how much in stock is left over.
+    Current Currency system is not flexible (we could have Australian Dollars
+    (AUD) which would have the same symbol as USD '$' or even Canadian Dollars.
+    We need a separation from currency and symbol. If there were a FACTORY for
+    the money, and the factory could determine the currency type, and create
+    money from the easy way.
