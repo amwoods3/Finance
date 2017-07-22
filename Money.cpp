@@ -1,8 +1,9 @@
 #include "Money.h"
 
 
-Money::Money(const std::string & amount) {
-    currency_ = amount[0];
+Money::Money(const std::string & amount, const std::string & currency) {
+    currency_ = currency;
+    currency_symbol_ = amount[0];
     amount_ = interpret_amount(amount, 1);
     has_larger_currency_ = string_has(amount, ".");
 }
@@ -19,7 +20,7 @@ long long unsigned interpret_amount(const std::string & amount,
         } else if (amount[i] == '.') {
             if (i == amount.size() - 1) {
                 // May end in '.' i.e. "$350."
-                total *= 100;
+                total *= 10;
                 return total;
             }
             if (amount[i+1] >= '0' && amount[i+1] <= '9') {
@@ -30,7 +31,6 @@ long long unsigned interpret_amount(const std::string & amount,
             total *= 10;
             if (i == amount.size() - 2) {
                 // May end in with only one decimal i.e "$350.2"
-                total *= 10;
                 return total;
             }
             if (amount[i+2] >= '0' && amount[i+1] <= '9') {
@@ -79,7 +79,7 @@ Money Money::operator/(const Money & m) const {
 
 
 std::string Money::repr() const {
-    std::string representation = currency_;
+    std::string representation = currency_symbol_;
     if (has_larger_currency()) {
         representation += std::to_string(amount_ / 100);
         representation += ".";

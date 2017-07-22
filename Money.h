@@ -19,13 +19,12 @@ public:
     // start the string with the currency sign (USD with '$', JPY with '¥', etc)
     // If currency has smaller part (cents for USD, pence for British Pound)
     //   then include a . with the amount for smaller currency.
-    Money(const std::string & amount);
+    Money(const std::string & amount, const std::string & currency);
     Money(long long unsigned amount)
         : amount_(amount) {}
 
 
     // currently calculates no matter then currency type
-    // TODO: prevent user from making this error
     Money operator+(const Money & m) const;
     Money operator-(const Money & m) const;
     Money operator*(const Money & m) const;
@@ -47,6 +46,7 @@ private:
     long long unsigned amount_;
     bool has_larger_currency_;
     std::string currency_;
+    std::string currency_symbol_;
 };
 
 inline

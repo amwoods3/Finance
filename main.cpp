@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Calendar.h"
-#include "Money.h"
+#include "MoneyFactory.h"
 #include "Test.h"
 
 int main(int argv, char ** argc) {
@@ -11,8 +11,9 @@ int main(int argv, char ** argc) {
             test();
         }
     } else {
-        Money m("$350.01");
-        std::cout << m << std::endl;
+        MoneyFactory usd("USD", '$', true);
+        Money allowance = usd("$50");
+        std::cout << allowance << std::endl;
     }
     return 0;
 }
