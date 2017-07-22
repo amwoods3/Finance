@@ -10,10 +10,9 @@ int main(int argv, char ** argc) {
         if (std::string(argc[1]) == std::string("test")) {
             test();
         }
+    } else {
+        Money m("$350.01");
+        std::cout << m << std::endl;
     }
-    Money m("$350.01");
-    std::cout << m << std::endl;
-    Money yen("¥499");
-    std::cout << yen << std::endl;
     return 0;
 }
