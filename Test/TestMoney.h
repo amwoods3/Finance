@@ -12,7 +12,7 @@ bool test_Money_operator_plus_different_currency_type() {
         Money jpy = Money("¥1844");
         Money wont_work = usd + jpy;
         return false;
-    } catch (std::exception e) {
+    } catch (CurrencyMismatch e) {
         return true;
     }
 }

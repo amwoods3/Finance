@@ -7,6 +7,8 @@
 #include <exception>
 
 
+class CurrencyMismatch: private std::exception {};
+
 // class to represent money. A double could be used, but it is inprecise
 // when representing numbers like 0.1 (10 cents) and also represents too many
 // decimals a better representation would be an integer representing the number
@@ -24,11 +26,12 @@ public:
 
     // currently calculates no matter then currency type
     // TODO: prevent user from making this error
-    Money operator+(const Money & m) const {return Money(amount_ + m.amount_);}
-    Money operator-(const Money & m) const {return Money(amount_ - m.amount_);}
-    Money operator*(const Money & m) const {return Money(amount_ * m.amount_);}
-    Money operator/(const Money & m) const {return Money(amount_ / m.amount_);}
+    Money operator+(const Money & m) const;
+    Money operator-(const Money & m) const;
+    Money operator*(const Money & m) const;
+    Money operator/(const Money & m) const;
 
+    void currency_match_assurance(const Money & m) const;
     double to_double() { return double(amount_) / 100.0; }
     long long unsigned to_integer() const {return amount_;}
 

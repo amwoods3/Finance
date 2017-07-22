@@ -44,6 +44,40 @@ long long unsigned interpret_amount(const std::string & amount,
     return total / 10;
 }
 
+void Money::currency_match_assurance(const Money & m) const {
+    if (currency() != m.currency()) {
+        // This is a problem so we must throw an error
+        CurrencyMismatch error;
+        throw error;
+    }
+    return;
+}
+
+
+Money Money::operator+(const Money & m) const {
+    currency_match_assurance(m);
+    return m.amount() + amount();
+}
+
+
+Money Money::operator-(const Money & m) const {
+    currency_match_assurance(m);
+    return m.amount() - amount();
+}
+
+
+Money Money::operator*(const Money & m) const {
+    currency_match_assurance(m);
+    return m.amount() * amount();
+}
+
+
+Money Money::operator/(const Money & m) const {
+    currency_match_assurance(m);
+    return m.amount() / amount();
+}
+
+
 std::string Money::repr() const {
     std::string representation = currency_;
     if (has_larger_currency()) {
