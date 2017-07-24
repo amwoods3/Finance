@@ -13,8 +13,3 @@ TODO:
 Add tests for:
 
 Add functionality:
-    Current Currency system is not flexible (we could have Australian Dollars
-    (AUD) which would have the same symbol as USD '$' or even Canadian Dollars.
-    We need a separation from currency and symbol. If there were a FACTORY for
-    the money, and the factory could determine the currency type, and create
-    money from the easy way.

@@ -7,6 +7,7 @@
 
 #include "TestCalendar.h"
 #include "TestMoney.h"
+#include "TestMoneyFactory.h"
 
 // A way to make sure that a given value is as expected is to check it against
 // expected value. If it is equal to expected value, the assertion will pass.
@@ -39,6 +40,8 @@ void fill_tests() {
     add_test_function(test_go_to_next_day, "test_go_to_next_day");
     add_test_function(test_Money_operator_plus_different_currency_type,
                       "test_Money_operator_plus_different_currency_type");
+    add_test_function(test_MoneyFactory_get_money,
+                      "test_MoneyFactory_get_money");
 }
 
 void test() {
