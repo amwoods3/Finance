@@ -17,10 +17,22 @@
 
 class Transaction {
 public:
+    // category (what kind of transaction), if the account affected was
+    // a decrease and how much money was involved
+    Transaction(int category, bool decrease, Money amount);
+
+    // get the amount of money remaining after the transaction
+    Money amount_after(Money original_amount);
+
+    Money amount() { return amount_; }
+    int category() { return category_;}
+    bool is_decrease() { return decrease_;}
     
+    void set_category(int cat) { category_ = cat;}
 private:
-    int category;
-    Money amount;
+    int category_;
+    bool decrease_;
+    Money amount_;
     
 };
 
