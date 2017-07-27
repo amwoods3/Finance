@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include <string>
+
 #include "Money.h"
 // class used for representing a transaction.
 // This class will be used for determining money flow
@@ -27,13 +29,16 @@ public:
     Money amount() { return amount_; }
     int category() { return category_;}
     bool is_decrease() { return decrease_;}
+    std::string description() { return description_; }
     
     void set_category(int cat) { category_ = cat;}
+    void set_description(const std::string & descr)
+    { description_ = descr; }
 private:
     int category_;
     bool decrease_;
     Money amount_;
-    
+    std::string description_;
 };
 
 #endif
