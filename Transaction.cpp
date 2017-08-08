@@ -1,7 +1,7 @@
 #include "Transaction.h"
 
-Transaction::Transaction(int cat, bool decrease, Money a)
-    : category_(cat), decrease_(decrease), amount_(a)
+Transaction::Transaction(int cat, bool decrease, Money a, Calendar date)
+    : category_(cat), decrease_(decrease), amount_(a), date_(date)
 {
     // The credit account may not be known straight away and may 
 }

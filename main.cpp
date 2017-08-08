@@ -1,9 +1,8 @@
 #include <iostream>
 #include <string>
 
-#include "Calendar.h"
-#include "MoneyFactory.h"
 #include "Test.h"
+#include "Account.h"
 
 int main(int argv, char ** argc) {
     if (argv > 1) {
@@ -11,9 +10,8 @@ int main(int argv, char ** argc) {
             test();
         }
     } else {
-        MoneyFactory usd("USD", '$', true);
-        Money allowance = usd("$50");
-        std::cout << allowance << std::endl;
+        Account wallet("USD", '$', true, "0");
+        std::cout << wallet.current_amount() << std::endl;
     }
     return 0;
 }

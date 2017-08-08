@@ -7,6 +7,7 @@
 #include <string>
 
 #include "Money.h"
+#include "Calendar.h"
 // class used for representing a transaction.
 // This class will be used for determining money flow
 // The transaction can have a category (such as Food Expense, Utilities Expense,
@@ -16,12 +17,13 @@
 // maybe one user wants to track how much money specifically they are spending
 // on specifically cigarettes. Etc.
 
+#define ACCOUNT_OPEN 0
 
 class Transaction {
 public:
     // category (what kind of transaction), if the account affected was
     // a decrease and how much money was involved
-    Transaction(int category, bool decrease, Money amount);
+    Transaction(int category, bool decrease, Money amount, Calendar date=Calendar());
 
     // get the amount of money remaining after the transaction
     Money amount_after(Money original_amount);
@@ -39,6 +41,7 @@ private:
     bool decrease_;
     Money amount_;
     std::string description_;
+    Calendar date_;
 };
 
 #endif

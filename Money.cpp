@@ -56,7 +56,11 @@ void Money::currency_match_assurance(const Money & m) const {
 
 Money Money::operator+(const Money & m) const {
     currency_match_assurance(m);
-    return m.amount() + amount();
+    Money nm = Money(m.amount() + amount());
+    nm.currency_ = m.currency_;
+    nm.currency_symbol_ = m.currency_symbol_;
+    nm.has_larger_currency_ = m.has_larger_currency();
+    return nm;
 }
 
 
