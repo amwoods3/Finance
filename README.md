@@ -10,20 +10,31 @@ create accounts. An account is an amount of money together in one area
 they can create an account called "Eat Out Budget". Then the program will be
 able to keep track of how much money they have to eat out with.
 
+=====================================================================
 What needs to be added (or worked on):
+=====================================================================
 
-The Account class currently has problems working with negative amounts.
+Account takes a Money instance when adding or subtracting an amount, which
+requires you to have a MoneyFactory outside of Account that Account already
+has. This is redundant and should not be necessary. Therefore, we need to
+create methods for adding and taking money from the Account with a string.
 
-The Transaction class doesn't handle problems like $53.27 - $64.20 (it will end
-up saying one has tons of money after this, which doesn't happen in real life).
+Account cannot start with a negative amount, should we make it possible for
+account to start with a negative amount?
 
-The Money class operators do not preserve currency type and symbol as well if
-the currency is broken up into smaller portions (such as dollars and cents).
-For example, if we say USD$(50.00) - USD$(30.00) the result money type doesn't
-know that it is USD and it doesn't know to display a $ or to break up into
-larger and smaller parts so would be displayed as "2000" which has no meaning
-on its own. Also, this problem escalates to not being able to operate on
-a money instance created this way: USD$(50.00) - USD$(30.00) + USD$(15.00) will
-throw an error because of Money mismatch.
+Account sould have a way to view transaction history. Kind of like how an
+account for a bank has a transaction history.
 
-Tests for functions are lacking, we need to write more.
+We want to be able to represent the amount of money in the account and have a
+quick and easy way to represent if it is negative. Maybe we can have a function
+that returns a string for the amount and adds a '-' in the front if it is
+negative.
+
+Tests for functions are lacking, we need to write more. (To add a test, one must
+go to the Test directory and add a file "TestXYZ" where XYZ is the name of the
+class that is being tested. If the file already exists, then adding a test for
+that class has the following convention (in this project):
+test_CLASSNAME_FUNCTIONNAME
+When writing tests, try to see if the result is what you expected by comparing
+to expected results. 
+).
