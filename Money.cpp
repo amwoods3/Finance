@@ -49,38 +49,67 @@ void Money::currency_match_assurance(const Money & m) const {
         // This is a problem so we must throw an error
         CurrencyMismatch error;
         throw error;
+    } if (has_larger_currency() != m.has_larger_currency()) {
+        CurrencyMismatch error;
+        throw error;
+    } if (symbol() != m.symbol()) {
+        CurrencyMismatch error;
+        throw error;
     }
     return;
 }
 
+void Money::translate_type_to(Money & m) const {
+    m.currency_ = currency();
+    m.currency_symbol_ = symbol();
+    m.has_larger_currency_ = has_larger_currency();
+}
 
 Money Money::operator+(const Money & m) const {
     currency_match_assurance(m);
-    Money nm = Money(m.amount() + amount());
-    nm.currency_ = m.currency_;
-    nm.currency_symbol_ = m.currency_symbol_;
-    nm.has_larger_currency_ = m.has_larger_currency();
-    return nm;
+    Money em = amount() + m.amount();
+    translate_type_to(em);
+    return em;
 }
 
 
 Money Money::operator-(const Money & m) const {
     currency_match_assurance(m);
-    return m.amount() - amount();
+    Money em = amount() - m.amount();
+    translate_type_to(em);
+    return em;
 }
 
 
-Money Money::operator*(const Money & m) const {
+bool Money::operator>(const Money & m) const {
     currency_match_assurance(m);
-    return m.amount() * amount();
+    return amount() > m.amount();
 }
 
-
-Money Money::operator/(const Money & m) const {
+bool Money::operator<(const Money & m) const {
     currency_match_assurance(m);
-    return m.amount() / amount();
+    return amount() < m.amount();
 }
 
+bool Money::operator==(const Money & m) const {
+    currency_match_assurance(m);
+    return amount() == m.amount();
+}
+
+bool Money::operator>=(const Money & m) const {
+    currency_match_assurance(m);
+    return amount() >= m.amount();
+}
+
+bool Money::operator<=(const Money & m) const {
+    currency_match_assurance(m);
+    return amount() <= m.amount();
+}
+
+bool Money::operator!=(const Money & m) const {
+    currency_match_assurance(m);
+    return amount() != m.amount();
+}
 
 std::string Money::repr() const {
     std::string representation = currency_symbol_;

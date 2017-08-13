@@ -10,7 +10,11 @@ Money Transaction::amount_after(Money oa) {
     if (is_decrease()) {
         // money cannot have a negative amount,
         // negative is represented by direction flow of money
-        return oa - amount();
+        if (oa >= amount()) {
+            return oa - amount();
+        } else {
+            return amount() - oa;
+        }
     } else {
         return oa + amount();
     }

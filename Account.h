@@ -19,7 +19,6 @@ public:
             const std::string & start_amount);
 
     Account(const MoneyFactory & mf, const std::string & start_amount);
-    // Add the ability to 
 
     
     // TODO: Fix to handle moving to and from negative values
@@ -27,8 +26,9 @@ public:
     void take_amount(const Money & m, int transaction_category);
 
     Money current_amount() const;
+    bool negative() const;
 private:
-    bool negative_;
+    std::vector<bool> negative_;
     std::vector<Money> amount_;
     std::vector<Transaction> transaction_list_;
     // Used for easily creating instances of Money when tracking spending

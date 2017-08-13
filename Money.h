@@ -23,12 +23,19 @@ public:
     Money(long long unsigned amount)
         : amount_(amount) {}
 
+    void translate_type_to(Money & m) const;
 
     // currently calculates no matter then currency type
     Money operator+(const Money & m) const;
     Money operator-(const Money & m) const;
-    Money operator*(const Money & m) const;
-    Money operator/(const Money & m) const;
+
+    // comparison operators
+    bool operator<(const Money & m) const;
+    bool operator>(const Money & m) const;
+    bool operator==(const Money & m) const;
+    bool operator>=(const Money & m) const;
+    bool operator<=(const Money & m) const;
+    bool operator!=(const Money & m) const;
 
     void currency_match_assurance(const Money & m) const;
     double to_double() { return double(amount_) / 100.0; }
@@ -41,6 +48,7 @@ public:
     void set_larger_currency(bool t) {has_larger_currency_ = t;}
 
     std::string currency() const { return currency_;}
+    std::string symbol() const { return currency_symbol_; }
     std::string repr() const;
 private:
     long long unsigned amount_;
