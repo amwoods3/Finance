@@ -38,6 +38,10 @@ void Account::add_amount(const Money & m, int transaction_category) {
     transaction_list_.push_back(t);
 }
 
+void Account::add_amount(const std::string & m, int tc) {
+    add_amount(mf_(m), tc);
+}
+
 void Account::take_amount(const Money & m, int transaction_category) {
     // If we are subtracting a negative amount from a negative number,
     // we just make it bigger thus, it is a decrease if it is not negative
@@ -50,6 +54,10 @@ void Account::take_amount(const Money & m, int transaction_category) {
     negative_.push_back(negative() || m > current_amount());
     amount_.push_back(t.amount_after(current_amount()));
     transaction_list_.push_back(t);
+}
+
+void Account::take_amount(const std::string & m, int tc) {
+    take_amount(mf_(m), tc);
 }
 
 Money Account::current_amount() const {
@@ -66,4 +74,11 @@ bool Account::negative() const {
         return false;
     }
     return negative_[negative_.size() - 1];
+}
+
+std::string Account::amount_repr() const {
+    if (negative()) {
+        return "-" + current_amount().repr();
+    }
+    return current_amount().repr();
 }

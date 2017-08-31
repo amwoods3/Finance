@@ -24,9 +24,13 @@ public:
     // TODO: Fix to handle moving to and from negative values
     void add_amount(const Money & m, int transaction_category);
     void take_amount(const Money & m, int transaction_category);
+    
+    void add_amount(const std::string & m, int transaction_category);
+    void take_amount(const std::string & m, int transaction_category);
 
     Money current_amount() const;
     bool negative() const;
+    std::string amount_repr() const;
 private:
     std::vector<bool> negative_;
     std::vector<Money> amount_;
