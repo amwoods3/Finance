@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 #include "Transaction.h"
 #include "MoneyFactory.h"
@@ -30,8 +31,12 @@ public:
     void take_amount(const std::string & m, const std::string & description);
 
     Money current_amount() const;
-    bool negative() const;
-    std::string amount_repr() const;
+    bool negative(int i=-1) const;
+    std::string amount_repr(int i=-1) const;
+
+    int number_transactions() const { return transaction_list_.size(); }
+    void show_transaction_history(int past_transactions=-1) const;
+    
 private:
     std::vector<bool> negative_;
     std::vector<Money> amount_;

@@ -27,3 +27,10 @@ Money Transaction::amount_after(Money oa) {
         return oa + amount();
     }
 }
+
+std::string Transaction::amount_repr() const {
+    if (is_decrease()) {
+        return "-" + amount().repr();
+    }
+    return amount().repr();
+}

@@ -29,9 +29,10 @@ public:
     // get the amount of money remaining after the transaction
     Money amount_after(Money original_amount);
 
-    Money amount() { return amount_; }
-    bool is_decrease() { return decrease_;}
-    std::string description() { return description_; }
+    Money amount() const { return amount_; }
+    std::string amount_repr() const;
+    bool is_decrease() const { return decrease_;}
+    std::string description() const { return description_; }
     void set_description(const std::string & descr)
     { description_ = descr; }
 private:
