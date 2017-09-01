@@ -37,16 +37,26 @@ namespace AccountManager {
         return Account(name, currency, c, cents, amount);
     }
 
+    std::string get_comment(std::vector<std::string> command, int start) {
+        std::string comment = "";
+        for (int i = start; i < command.size(); ++i) {
+            comment += command[i] + ' ';
+        }
+        return comment;
+    }
     void add(Account & ac, std::vector<std::string> add_command) {
         // assume the command starts from 2 (after the add command)
-        // the comment is at position 3
-        ac.add_amount(add_command[2], add_command[3]);
+        // the comment is from position 3 onward
+        std::string comment = get_comment(add_command, 3);
+        
+        ac.add_amount(add_command[2], comment);
     }
 
     void take(Account & ac, std::vector<std::string> take_command) {
         // assume the command starts from 2 (after the add command)
-        // the comment is at position 3
-        ac.take_amount(take_command[2], take_command[3]);
+        // the comment is from position 3 onward
+        std::string comment = get_comment(take_command, 3);
+        ac.take_amount(take_command[2], comment);
     }
     void perform_command(const std::string & command,
                          AccountMap &accounts) {
