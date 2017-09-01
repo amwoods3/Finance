@@ -17,27 +17,24 @@
 // maybe one user wants to track how much money specifically they are spending
 // on specifically cigarettes. Etc.
 
-#define ACCOUNT_OPEN 0
-
 class Transaction {
 public:
     // category (what kind of transaction), if the account affected was
     // a decrease and how much money was involved
-    Transaction(int category, bool decrease, Money amount, Calendar date=Calendar());
-
+    Transaction(bool decrease, Money amount, Calendar date=Calendar());
+    Transaction(const std::string & description,
+                bool decrease, Money amount,
+                Calendar date=Calendar());
+                
     // get the amount of money remaining after the transaction
     Money amount_after(Money original_amount);
 
     Money amount() { return amount_; }
-    int category() { return category_;}
     bool is_decrease() { return decrease_;}
     std::string description() { return description_; }
-    
-    void set_category(int cat) { category_ = cat;}
     void set_description(const std::string & descr)
     { description_ = descr; }
 private:
-    int category_;
     bool decrease_;
     Money amount_;
     std::string description_;

@@ -14,19 +14,20 @@
 class Account {
 public:
     // Create an account
-    Account(const std::string & currency, char currency_symbol,
-            bool currency_has_cents,
+    Account(const std::string & name, const std::string & currency,
+            char currency_symbol, bool currency_has_cents,
             const std::string & start_amount);
 
-    Account(const MoneyFactory & mf, const std::string & start_amount);
+    Account(const std::string & name, const MoneyFactory & mf,
+            const std::string & start_amount);
 
     
     // TODO: Fix to handle moving to and from negative values
-    void add_amount(const Money & m, int transaction_category);
-    void take_amount(const Money & m, int transaction_category);
+    void add_amount(const Money & m, const std::string & description);
+    void take_amount(const Money & m, const std::string & description);
     
-    void add_amount(const std::string & m, int transaction_category);
-    void take_amount(const std::string & m, int transaction_category);
+    void add_amount(const std::string & m, const std::string & description);
+    void take_amount(const std::string & m, const std::string & description);
 
     Money current_amount() const;
     bool negative() const;
@@ -37,6 +38,7 @@ private:
     std::vector<Transaction> transaction_list_;
     // Used for easily creating instances of Money when tracking spending
     MoneyFactory mf_;
+    std::string name_;
 };
 
 #endif

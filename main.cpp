@@ -10,15 +10,12 @@ int main(int argv, char ** argc) {
             test();
         }
     } else {
-        Account food_budget = Account("USD", '$', true, "50");
-        std::cout << "Open food account with $50 "
-                  << food_budget.amount_repr() << std::endl;
-        food_budget.take_amount("82.33", 1); // Spend
-        std::cout << "spent $82.33 on food "
-                  << food_budget.amount_repr() << std::endl;
-        food_budget.add_amount("100", 1); // Spend
-        std::cout << "add $100 to food budget "
-                  << food_budget.amount_repr() << std::endl;
+        Account food_budget = Account("Food", "USD", '$', true, "50");
+        Account blah = Account("Account", "USD", '$', true, "100");
+        food_budget.take_amount("82.33", "Buy weeks groceries"); // Spend
+        food_budget.add_amount("100", "Add $100 to budget from blah account"); // Spend
+        blah.take_amount("100", "Move $100 to food");
+        std::cout << food_budget.amount_repr() << std::endl;
     }
     return 0;
 }

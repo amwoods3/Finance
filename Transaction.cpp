@@ -1,9 +1,17 @@
 #include "Transaction.h"
 
-Transaction::Transaction(int cat, bool decrease, Money a, Calendar date)
-    : category_(cat), decrease_(decrease), amount_(a), date_(date)
+Transaction::Transaction(bool decrease, Money a, Calendar date)
+    : decrease_(decrease), amount_(a), date_(date)
 {
     // The credit account may not be known straight away and may 
+}
+
+Transaction::Transaction(const std::string & description,
+                         bool decrease, Money a,
+                         Calendar date)
+    : description_(description), decrease_(decrease), amount_(a),
+      date_(date)
+{
 }
 
 Money Transaction::amount_after(Money oa) {
