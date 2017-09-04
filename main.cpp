@@ -11,8 +11,7 @@ int main(int argv, char ** argc) {
             test();
         }
     } else {
-        Calendar x = Calendar("2012/07/12");
-        std::cout << x << std::endl;
+        
     }
     return 0;
 }

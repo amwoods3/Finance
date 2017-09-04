@@ -21,12 +21,13 @@ Account::Account(const std::string & name, const MoneyFactory & mf,
 }
 
 
-void Account::add_amount(const Money & m, const std::string & description) {
+void Account::add_amount(const Money & m, const std::string & description,
+                         Calendar date) {
     // If we are adding an amount to a negative amount, that amount
     // gets smaller so it is a decrease if negative
     Transaction t = Transaction(description,
                                 negative(),
-                                m);
+                                m, date);
 
 
     // If negative and the amount added is less than current_amount
@@ -40,16 +41,18 @@ void Account::add_amount(const Money & m, const std::string & description) {
     }
 }
 
-void Account::add_amount(const std::string & m, const std::string & description) {
+void Account::add_amount(const std::string & m, const std::string & description,
+                         Calendar date) {
     add_amount(mf_(m), description);
 }
 
-void Account::take_amount(const Money & m, const std::string & description) {
+void Account::take_amount(const Money & m, const std::string & description,
+                          Calendar date) {
     // If we are subtracting a negative amount from a negative number,
     // we just make it bigger thus, it is a decrease if it is not negative
     Transaction t = Transaction(description,
                                 !negative(),
-                                m);
+                                m, date);
 
     // If we took more than we had, we go negative.
     // If we were negative, we stay negative.
@@ -58,7 +61,8 @@ void Account::take_amount(const Money & m, const std::string & description) {
     transaction_list_.push_back(t);
 }
 
-void Account::take_amount(const std::string & m, const std::string & description) {
+void Account::take_amount(const std::string & m, const std::string & description,
+                          Calendar date) {
     take_amount(mf_(m), description);
 }
 
