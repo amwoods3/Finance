@@ -1,6 +1,8 @@
 #include "Calendar.h"
 
-Calendar::Calendar(int year, int month, int day, bool display_english) {
+bool Calendar::display_in_English_ = true;
+
+Calendar::Calendar(int year, int month, int day) {
     year_ = year;
     // count from 0 to year_ to get number of days
     if (month < 0 || month > 11) {
@@ -10,21 +12,19 @@ Calendar::Calendar(int year, int month, int day, bool display_english) {
     month_ = month;
     day_ = day;
     day_value_ = day_value_of(year_, month_, day_);
-    display_in_English_ = display_english;
 }
 
-Calendar::Calendar(bool display_english) {
+Calendar::Calendar() {
         std::time_t t = std::time(0);
         struct tm * now = std::localtime(&t);
         year_ = now->tm_year + 1900;
         month_ = now->tm_mon;
         day_ = now->tm_mday;
         day_value_ = day_value_of(year_, month_, day_);
-        display_in_English_ = display_english;
         
 }
 
-Calendar::Calendar(int day_value, bool display_english) {
+Calendar::Calendar(int day_value) {
     int dv = 0;
     year_ = 0;
     month_ = 0;
@@ -62,8 +62,6 @@ Calendar::Calendar(int day_value, bool display_english) {
     } else {
         day_ = 1;
     }
-
-    display_in_English_ = display_english;
     day_value_ = day_value;
 }
 

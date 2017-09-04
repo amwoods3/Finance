@@ -19,11 +19,11 @@ class MonthError: private std::exception {};
 
 class Calendar {
 public:
-    Calendar(int year, int month, int day, bool display_english=false);
-    Calendar(bool display_english=false);
+    Calendar(int year, int month, int day);
+    Calendar();
 
     // Get a day with a certain day_value
-    Calendar(int day_value, bool display_english=false);
+    Calendar(int day_value);
     int year() const {
         return year_;
     }
@@ -40,10 +40,13 @@ public:
         return day_value_;
     }
 
-    int displaysEnglish() const {
+    static bool displaysEnglish() {
         return display_in_English_;
     }
 
+    static void toggleEnglish() {
+        display_in_English_ = !display_in_English_;
+    }
     int days_from(const Calendar & c) const;
 
     void state_days_from(const Calendar & c) const;
@@ -54,7 +57,7 @@ private:
     int month_;
     int day_;
     int day_value_;
-    bool display_in_English_;
+    static bool display_in_English_;
 };
 
 // print calendar date, if displaysEnglish() returns true will write month
