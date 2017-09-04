@@ -1,70 +1,9 @@
 #include "AccountManager.h"
 
 namespace AccountManager {
-    std::vector<std::string> split(const std::string & s, char splitter) {
-        std::vector<std::string> splits;
-        std::string sub;
-        for (int i = 0; i < s.size(); ++i) {
-            if (s[i] == splitter) {
-                splits.push_back(sub);
-                sub = "";
-            } else {
-                sub += s[i];
-            }
-        }
-        if (sub.size() > 0) {
-            splits.push_back(sub);
-        }
-        return splits;
-    }
 
-    std::vector<std::string> split_grouping(const std::string & s,
-                                            char splitter) {
-        std::vector<std::string> splits;
-        std::string sub;
-        bool in_grouping = false;
-        char grouping_char = ' ';
-        for (int i = 0; i < s.size(); ++i) {
-            if (in_grouping) {
-                // If we are grouping, we want to group everything
-                // verbatim. We do not want to ingore spaces, etc.
-                // This allows for long description and things to
-                // follow descriptions, such as transaction dates
-                if (s[i] == grouping_char) {
-                    grouping_char = ' ';
-                    splits.push_back(sub);
-                    sub = "";
-                } else {
-                    // copy verbatim
-                    sub += s[i];
-                }
-            } else {
-                if (s[i] == splitter) {
-                    splits.push_back(sub);
-                    sub = "";
-                } else if (s[i] == '\'' || s[i] == '"') {
-                    // We may be looking at a description or such
-                    // we have to start grouping
-                    in_grouping = true;
-                    grouping_char = s[i];
-                } else {
-                sub += s[i];
-                }
-            }
-        }
-        if (in_grouping) {
-            // we have a problem,
-            // TODO: Handle this error
-        }
-        if (sub.size() > 0) {
-            splits.push_back(sub);
-        }
-        return splits;
-    }
-
-    
     Account create(const std::string & account) {
-        std::vector<std::string> account_components = split(account);
+        std::vector<std::string> account_components = Parsing::split(account);
         for (int i = 0; i < account_components.size(); ++i) {
             std::cout << account_components[i] << std::endl;
         }
@@ -104,7 +43,7 @@ namespace AccountManager {
     
     void perform_command(const std::string & command,
                          AccountMap &accounts) {
-        std::vector<std::string> command_parts = split_grouping(command);
+        std::vector<std::string> command_parts = Parsing::split_grouping(command);
         if (command_parts[0] == "create") {
             Account t = create(command_parts);
             accounts.insert(AccountPair(t.name(), t));

@@ -6,6 +6,8 @@
 #include <exception>
 #include <ctime>
 
+#include "Parsing.h"
+
 /*
   This Caledar class can tell the difference between two dates, and it can add
   a certain number of days to a given date giving the result date.
@@ -28,6 +30,8 @@ public:
         return year_;
     }
 
+    // expects the format of yyyy/mm/dd, yyyy/m/d or any combination of these
+    Calendar(const std::string & date);
     int month() const {
         return month_;
     }

@@ -65,6 +65,20 @@ Calendar::Calendar(int day_value) {
     day_value_ = day_value;
 }
 
+Calendar::Calendar(const std::string & date) {
+    std::vector<std::string> yyyymmdd = Parsing::split(date, '/');
+    // using atoi to keep compatibility with earlier instances of C++
+    // No error checking is done for strange inputs or missing dates
+    // We also don't check if the date is not possible (except month)
+    year_ = atoi(yyyymmdd[0].c_str());
+    month_ = atoi(yyyymmdd[1].c_str()) - 1;
+    if (month_ < 0 || month_ > 11) {
+        MonthError me;
+        throw me;
+    }
+    day_ = atoi(yyyymmdd[2].c_str());
+    day_value_ = day_value_of(year_, month_, day_);
+}
 
 int Calendar::days_from(const Calendar & c) const {
     return c.day_value() - day_value();
