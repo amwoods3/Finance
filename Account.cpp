@@ -102,31 +102,42 @@ std::string Account::amount_repr(int i) const {
 }
 
 void Account::show_transaction_history(int past_transactions) const {
+    const int length = 100;
     std::cout << "Transactions for " << name_ << ":\n";
-    std::cout << std::setfill('#') << std::setw(79);
+    std::cout << std::setfill('#') << std::setw(length);
     std::cout << "#" << std::endl;
     std::cout << std::setw(1);
-    std::cout << "# Amount     # Balance            # ";
-    std::cout << std::setfill(' ') << std::setw(42);
-    std::cout << std::left << "Description";
+    std::cout << "# Amount     # Balance            # Date ";
+    std::cout << std::setfill(' ') << std::setw(14);
+    std::cout << "#";
+    std::cout << std::setfill(' ') << std::setw(43);
+    std::cout << std::left << " Description";
     std::cout << "#" << std::endl;
-    std::cout << std::setfill('#') << std::setw(79) << "#" << std::endl;
+    std::cout << std::setfill('#') << std::setw(length) << "#" << std::endl;
     int n = past_transactions;
     if (past_transactions <= -1) {
         n = number_transactions();
     }
     for (int i = number_transactions() - n; i < number_transactions(); ++i) {
         std::cout << "# ";
+        // Print the amount of the transaction
         std::cout << std::setfill(' ') << std::setw(10) << std::left;
         std::cout << transaction_list_[i].amount_repr();
         std::cout << std::setw(1);
         std::cout << " # ";
+
+        // Next print the amount left in the account after the transaction
         std::cout << std::setfill(' ') << std::setw(18) << std::left;
         std::cout << amount_repr(i) << " # ";
+        
+        // Print the date of the transaction
+        std::cout << std::setfill(' ') << transaction_list_[i].date() << " # ";
+        
+        // Finally print the description of the transaction
         std::cout << std::setfill(' ') << std::setw(42) << std::left;
         std::cout << transaction_list_[i].description();
         std::cout << "#" << std::endl;
         
     }
-    std::cout << std::setfill('#') << std::setw(79) << "#" << std::endl;
+    std::cout << std::setfill('#') << std::setw(length) << "#" << std::endl;
 }

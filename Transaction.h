@@ -35,6 +35,8 @@ public:
     std::string description() const { return description_; }
     void set_description(const std::string & descr)
     { description_ = descr; }
+
+    Calendar date() const { return date_;}
 private:
     bool decrease_;
     Money amount_;
