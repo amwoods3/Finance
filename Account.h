@@ -18,10 +18,10 @@ public:
     // Create an account
     Account(const std::string & name, const std::string & currency,
             char currency_symbol, bool currency_has_cents,
-            const std::string & start_amount);
+            const std::string & start_amount, Calendar date=Calendar());
 
     Account(const std::string & name, const MoneyFactory & mf,
-            const std::string & start_amount);
+            const std::string & start_amount, Calendar date=Calendar());
 
     
     // TODO: Fix to handle moving to and from negative values

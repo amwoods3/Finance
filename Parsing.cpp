@@ -34,12 +34,13 @@ namespace Parsing {
                     grouping_char = ' ';
                     splits.push_back(sub);
                     sub = "";
+                    in_grouping = false;
                 } else {
                     // copy verbatim
                     sub += s[i];
                 }
             } else {
-                if (s[i] == splitter) {
+                if (s[i] == splitter && sub.size() > 0) {
                     splits.push_back(sub);
                     sub = "";
                 } else if (s[i] == '\'' || s[i] == '"') {
@@ -48,7 +49,7 @@ namespace Parsing {
                     in_grouping = true;
                     grouping_char = s[i];
                 } else {
-                sub += s[i];
+                    sub += s[i];
                 }
             }
         }

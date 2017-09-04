@@ -19,6 +19,12 @@ namespace AccountManager {
         char c = account_components[3].c_str()[0];
         bool cents = account_components[4] == "y";
         std::string amount = account_components[5];
+
+        // If a date is included, we should use it
+        if (account_components.size() > 6) {
+            return Account(name, currency, c, cents, amount,
+                           account_components[6]);
+        }
         return Account(name, currency, c, cents, amount);
     }
 
@@ -30,15 +36,24 @@ namespace AccountManager {
         // assume the command starts from 2 (after the add command)
         // the comment is from position 3 onward
         std::string comment = get_comment(add_command, 3);
-        
-        ac.add_amount(add_command[2], comment);
+        if (add_command.size() > 4) {
+            ac.add_amount(add_command[2], comment, Calendar(add_command[4]));
+        } else {
+            ac.add_amount(add_command[2], comment);
+        }
     }
 
     void take(Account & ac, std::vector<std::string> take_command) {
         // assume the command starts from 2 (after the add command)
         // the comment is from position 3 onward
         std::string comment = get_comment(take_command, 3);
-        ac.take_amount(take_command[2], comment);
+        if (take_command.size() > 4) {
+            std::cout << '(' << take_command[4] << ')' << std::endl;
+            ac.take_amount(take_command[2], comment,
+                           Calendar(take_command[4]));
+        } else {
+            ac.take_amount(take_command[2], comment);
+        }
     }
     
     void perform_command(const std::string & command,

@@ -4,20 +4,22 @@ Account::Account(const std::string & name,
                  const std::string & currency,
                  char currency_symbol,
                  bool has_cents,
-                 const std::string & start_amount):
+                 const std::string & start_amount,
+                 Calendar date):
     mf_(MoneyFactory(currency, currency_symbol, has_cents)), name_(name)
 {
     // Assumes that format is format that the money factory can handle
     Money start = mf_(start_amount);
-    add_amount(start, "Open " + name + " account.");
+    add_amount(start, "Open " + name + " account.", date);
 }
 
 Account::Account(const std::string & name, const MoneyFactory & mf,
-                 const std::string & start_amount)
+                 const std::string & start_amount,
+                 Calendar date)
     : mf_(mf), name_(name)
 {
     Money start = mf_(start_amount);
-    add_amount(start, "Open " + name + " account.");
+    add_amount(start, "Open " + name + " account.", date);
 }
 
 
