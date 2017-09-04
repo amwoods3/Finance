@@ -73,6 +73,8 @@ namespace AccountManager {
                 } else if (command_parts[1] == "take" ||
                            command_parts[1] == "-") {
                     take(ac->second, command_parts);
+                } else if (command_parts[1] == "show") {
+                    ac->second.show_transaction_history();
                 }
             } else {
                 std::cout << "Unknown account " << command_parts[0]
