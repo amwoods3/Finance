@@ -14,7 +14,7 @@ For example, say you have a budget that you are keeping track of food spending.
 You want to make sure that you regulate your budget on food.
 Then you could create an account like so (starting out with $150.00):
 
->>> create food USD $ y 150.00
+>>> create food USD 150.00
 
 This will create the account for handling food. Now, say that you went to
 an Indian restaurant and you spent $15.80 on food there. You can then

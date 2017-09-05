@@ -9,6 +9,7 @@
 
 #include "Account.h"
 #include "Parsing.h"
+#include "Currencies.h"
 
 typedef std::map<std::string, Account> AccountMap;
 typedef std::pair<std::string, Account> AccountPair;

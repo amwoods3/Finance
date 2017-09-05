@@ -16,14 +16,14 @@ namespace AccountManager {
         // and finally the starting amount for the account.
         std::string name = account_components[1];
         std::string currency = account_components[2];
-        char c = account_components[3].c_str()[0];
-        bool cents = account_components[4] == "y";
-        std::string amount = account_components[5];
+        char c = get_symbol(currency);
+        bool cents = has_cents(currency);
+        std::string amount = account_components[3];
 
         // If a date is included, we should use it
-        if (account_components.size() > 6) {
+        if (account_components.size() > 4) {
             return Account(name, currency, c, cents, amount,
-                           account_components[6]);
+                           account_components[4]);
         }
         return Account(name, currency, c, cents, amount);
     }
@@ -35,7 +35,14 @@ namespace AccountManager {
     void add(Account & ac, std::vector<std::string> add_command) {
         // assume the command starts from 2 (after the add command)
         // the comment is from position 3 onward
-        std::string comment = get_comment(add_command, 3);
+        std::string comment;
+        if (add_command.size() > 3) {
+            comment = get_comment(add_command, 3);
+        } else {
+            std::cout << "warning!, no description, failed to create transaction"
+                      << std::endl;
+            return;
+        }
         if (add_command.size() > 4) {
             ac.add_amount(add_command[2], comment, Calendar(add_command[4]));
         } else {
@@ -46,7 +53,14 @@ namespace AccountManager {
     void take(Account & ac, std::vector<std::string> take_command) {
         // assume the command starts from 2 (after the add command)
         // the comment is from position 3 onward
-        std::string comment = get_comment(take_command, 3);
+        std::string comment;
+        if (take_command.size() > 3) {
+            comment = get_comment(take_command, 3);
+        } else {
+            std::cout << "warning!, no description, failed to create transaction"
+                      << std::endl;
+            return;
+        }
         if (take_command.size() > 4) {
             std::cout << '(' << take_command[4] << ')' << std::endl;
             ac.take_amount(take_command[2], comment,
@@ -64,6 +78,12 @@ namespace AccountManager {
                 command_parts[1] == "load" ||
                 command_parts[1] == "list") {
                 std::cout << "Cannot name a file that! " << std::endl;
+                return;
+            }
+            if (!is_known(command_parts[2])) {
+                // Make sure we know the currency before continuing
+                std::cout << "Unknown Currency " << command_parts[2]
+                          << std::endl;
                 return;
             }
             Account t = create(command_parts);
