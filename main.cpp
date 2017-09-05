@@ -14,6 +14,7 @@ int main(int argv, char ** argc) {
         AccountMap accounts;
         std::string command;
         while (true) {
+            std::cout << ">>> ";
             std::getline(std::cin, command);
             if (command == "quit") {
                 break;
