@@ -1,40 +1,49 @@
-This is an application meant for keeping track of money usage over a period of
-time. It is currently under development, and has many features still yet to
-come.
+This application is used to keep track of personal financial activity.
+It is a bare bones application that can keep track of money coming in,
+money going out, etc.
 
-What the application can do so far:
+Using the application
 
-The Account class has been created, so the application has the ability to
-create accounts. An account is an amount of money together in one area
-(analygous to a bank account). For example, if one has a budget for eating out
-they can create an account called "Eat Out Budget". Then the program will be
-able to keep track of how much money they have to eat out with.
+to compile the program run 'make' in the command prompt.
+to run the program run 'make r' in the command prompt.
 
-=====================================================================
-What needs to be added (or worked on):
-=====================================================================
+The application is seperated into accounts that keep track of individual
+activity.
 
-Account takes a Money instance when adding or subtracting an amount, which
-requires you to have a MoneyFactory outside of Account that Account already
-has. This is redundant and should not be necessary. Therefore, we need to
-create methods for adding and taking money from the Account with a string.
+For example, say you have a budget that you are keeping track of food spending.
+You want to make sure that you regulate your budget on food.
+Then you could create an account like so (starting out with $150.00):
 
-Account cannot start with a negative amount, should we make it possible for
-account to start with a negative amount?
+>>> create food USD $ y 150.00
 
-Account sould have a way to view transaction history. Kind of like how an
-account for a bank has a transaction history.
+This will create the account for handling food. Now, say that you went to
+an Indian restaurant and you spent $15.80 on food there. You can then
+tell the program
 
-We want to be able to represent the amount of money in the account and have a
-quick and easy way to represent if it is negative. Maybe we can have a function
-that returns a string for the amount and adds a '-' in the front if it is
-negative.
+>>> food take 15.80 "eat at Indian restaurant"
 
-Tests for functions are lacking, we need to write more. (To add a test, one must
-go to the Test directory and add a file "TestXYZ" where XYZ is the name of the
-class that is being tested. If the file already exists, then adding a test for
-that class has the following convention (in this project):
-test_CLASSNAME_FUNCTIONNAME
-When writing tests, try to see if the result is what you expected by comparing
-to expected results. 
-).
+and it will subtract $15.80 from your food account.
+
+If you want to show the transactional history of food, you can do that by
+saying:
+
+>>> food show
+
+then, it will show the transaction history of food for you.
+
+If you want to add money to food then you can do this:
+
+>>> food add $50 'Add budget from pay'
+
+This will give you the ability to add money to the food account. (You may
+want to take from another account that food got the money from).
+
+After you have finished with the activity, lets say you want to save it.
+The following command saves:
+>>> save
+
+If you rerun the program, then you may want to reload food again so that you
+can edit its activity.
+The following command loads food:
+>>> load food
+
