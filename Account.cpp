@@ -154,7 +154,7 @@ void Account::save() const {
     }
     account_file << transaction_list_[0].amount().repr() << ' ';
     Calendar date = transaction_list_[0].date();
-    account_file << date.year() << '/' << date.month() << '/' << date.day();
+    account_file << date.year() << '/' << date.month()+1 << '/' << date.day();
     account_file << '\n';
     for (int i = 1; i < transaction_list_.size(); ++i) {
         Transaction t = transaction_list_[i];
@@ -167,7 +167,7 @@ void Account::save() const {
         account_file << t.amount().repr() << " '";
         account_file << t.description() << "' ";
         Calendar date = t.date();
-        account_file << date.year() << '/' << date.month() << '/' << date.day();
+        account_file << date.year() << '/' << date.month()+1 << '/' << date.day();
         account_file << '\n';
     }
     account_file.close();
