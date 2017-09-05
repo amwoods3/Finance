@@ -61,7 +61,8 @@ namespace AccountManager {
         std::vector<std::string> command_parts = Parsing::split_grouping(command);
         if (command_parts[0] == "create") {
             if (command_parts[1] == "create" ||
-                command_parts[1] == "load") {
+                command_parts[1] == "load" ||
+                command_parts[1] == "list") {
                 std::cout << "Cannot name a file that! " << std::endl;
                 return;
             }
@@ -95,6 +96,12 @@ namespace AccountManager {
                 std::cout << "could not find accout " << command_parts[1]
                           << "!" << std::endl;
                 return;
+            }
+        } else if (command_parts[0] == "list") {
+            for (AccountIterator ait = accounts.begin(); ait != accounts.end();
+                 ++ait) {
+                std::cout << ait->first << ' ' << ait->second.current_amount()
+                          << std::endl;
             }
         } else {
             // the first thing we expect is the account name
