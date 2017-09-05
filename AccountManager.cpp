@@ -68,6 +68,16 @@ namespace AccountManager {
             Account t = create(command_parts);
             accounts.insert(AccountPair(t.name(), t));
         } else if (command_parts[0] == "load") {
+
+            // if we are loading an account already in the map,
+            // we will have issues, so let's not load that
+            if (accounts.find(command_parts[1]) != accounts.end()) {
+                // We have been told to load an account that is already
+                // loaded, let's stop
+                std::cout << "This account is already loaded!" << std::endl;
+                return;
+            }
+            
             // Here we want to load the account that is here
             // load all previous transaction history
             std::ifstream account_to_load;
