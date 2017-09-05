@@ -60,8 +60,32 @@ namespace AccountManager {
                          AccountMap &accounts) {
         std::vector<std::string> command_parts = Parsing::split_grouping(command);
         if (command_parts[0] == "create") {
+            if (command_parts[1] == "create" ||
+                command_parts[1] == "load") {
+                std::cout << "Cannot name a file that! " << std::endl;
+                return;
+            }
             Account t = create(command_parts);
             accounts.insert(AccountPair(t.name(), t));
+        } else if (command_parts[0] == "load") {
+            // Here we want to load the account that is here
+            // load all previous transaction history
+            std::ifstream account_to_load;
+            account_to_load.open("Accounts/" + command_parts[1] + ".account");
+            if (account_to_load.is_open()) {
+                std::string load_command;
+                while (std::getline(account_to_load, load_command)) {
+                    perform_command(load_command, accounts);
+                }
+                std::cout << "successfully loaded " << command_parts[1]
+                          << "!" << std::endl;
+                account_to_load.close();
+                return;
+            } else {
+                std::cout << "could not find accout " << command_parts[1]
+                          << "!" << std::endl;
+                return;
+            }
         } else {
             // the first thing we expect is the account name
             AccountIterator ac = accounts.find(command_parts[0]);
