@@ -15,6 +15,10 @@ public:
     Money get_money(std::string) const;
 
     Money operator()(const std::string & s) const { return get_money(s);}
+
+    std::string currency() const { return currency_; }
+    char symbol() const { return symbol_; }
+    bool has_cents() const { return has_cents_; }
 private:
     std::string currency_;
     char symbol_;

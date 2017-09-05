@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 #include "Transaction.h"
 #include "MoneyFactory.h"
@@ -38,10 +39,13 @@ public:
     Money current_amount() const;
     bool negative(int i=-1) const;
     std::string amount_repr(int i=-1) const;
-    std::string name() { return name_;}
+    std::string name() const { return name_;}
 
     int number_transactions() const { return transaction_list_.size(); }
     void show_transaction_history(int past_transactions=-1) const;
+
+    // saves a file that can have the account reopened on a sequential run
+    void save() const;
     
 private:
     std::vector<bool> negative_;

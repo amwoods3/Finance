@@ -17,6 +17,8 @@ int main(int argv, char ** argc) {
             std::getline(std::cin, command);
             if (command == "quit") {
                 break;
+            } else if (command == "save") {
+                AccountManager::save_accounts(accounts);
             } else {
                 AccountManager::perform_command(command, accounts);
             }

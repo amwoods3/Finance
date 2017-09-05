@@ -83,4 +83,11 @@ namespace AccountManager {
         }
     }
 
+    void save_accounts(AccountMap & am) {
+        for (AccountIterator ait = am.begin(); ait != am.end(); ++ait) {
+            std::cout << "saving account " << ait->first << std::endl;
+            ait->second.save();
+        }
+    }
+
 };

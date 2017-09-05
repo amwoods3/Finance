@@ -141,3 +141,34 @@ void Account::show_transaction_history(int past_transactions) const {
     }
     std::cout << std::setfill('#') << std::setw(length) << "#" << std::endl;
 }
+
+void Account::save() const {
+    std::ofstream account_file;
+    account_file.open("Accounts/" + name_ + ".account");
+    account_file << "create " << name() << ' ' << mf_.currency() << ' '
+           << mf_.symbol();
+    if (mf_.has_cents()) {
+        account_file << " y ";
+    } else {
+        account_file << " n ";
+    }
+    account_file << transaction_list_[0].amount().repr() << ' ';
+    Calendar date = transaction_list_[0].date();
+    account_file << date.year() << '/' << date.month() << '/' << date.day();
+    account_file << '\n';
+    for (int i = 1; i < transaction_list_.size(); ++i) {
+        Transaction t = transaction_list_[i];
+        account_file << name_ << ' ';
+        if (t.is_decrease()) {
+            account_file << "take ";
+        } else {
+            account_file << "add ";
+        }
+        account_file << t.amount().repr() << " '";
+        account_file << t.description() << "' ";
+        Calendar date = t.date();
+        account_file << date.year() << '/' << date.month() << '/' << date.day();
+        account_file << '\n';
+    }
+    account_file.close();
+}
