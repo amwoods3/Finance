@@ -145,13 +145,7 @@ void Account::show_transaction_history(int past_transactions) const {
 void Account::save() const {
     std::ofstream account_file;
     account_file.open("Accounts/" + name_ + ".account");
-    account_file << "create " << name() << ' ' << mf_.currency() << ' '
-           << mf_.symbol();
-    if (mf_.has_cents()) {
-        account_file << " y ";
-    } else {
-        account_file << " n ";
-    }
+    account_file << "create " << name() << ' ' << mf_.currency() << ' ';
     account_file << transaction_list_[0].amount().repr() << ' ';
     Calendar date = transaction_list_[0].date();
     account_file << date.year() << '/' << date.month()+1 << '/' << date.day();
