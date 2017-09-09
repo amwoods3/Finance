@@ -7,7 +7,7 @@ namespace AccountManager {
         for (int i = 0; i < account_components.size(); ++i) {
             std::cout << account_components[i] << std::endl;
         }
-        
+
         return create(account_components);
     }
 
@@ -62,14 +62,13 @@ namespace AccountManager {
             return;
         }
         if (take_command.size() > 4) {
-            std::cout << '(' << take_command[4] << ')' << std::endl;
             ac.take_amount(take_command[2], comment,
                            Calendar(take_command[4]));
         } else {
             ac.take_amount(take_command[2], comment);
         }
     }
-    
+
     void perform_command(const std::string & command,
                          AccountMap &accounts) {
         std::vector<std::string> command_parts = Parsing::split_grouping(command);
@@ -98,7 +97,7 @@ namespace AccountManager {
                 std::cout << "This account is already loaded!" << std::endl;
                 return;
             }
-            
+
             // Here we want to load the account that is here
             // load all previous transaction history
             std::ifstream account_to_load;

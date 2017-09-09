@@ -45,7 +45,7 @@ void Account::add_amount(const Money & m, const std::string & description,
 
 void Account::add_amount(const std::string & m, const std::string & description,
                          Calendar date) {
-    add_amount(mf_(m), description);
+    add_amount(mf_(m), description, date);
 }
 
 void Account::take_amount(const Money & m, const std::string & description,
@@ -65,7 +65,7 @@ void Account::take_amount(const Money & m, const std::string & description,
 
 void Account::take_amount(const std::string & m, const std::string & description,
                           Calendar date) {
-    take_amount(mf_(m), description);
+    take_amount(mf_(m), description, date);
 }
 
 Money Account::current_amount() const {
@@ -129,15 +129,15 @@ void Account::show_transaction_history(int past_transactions) const {
         // Next print the amount left in the account after the transaction
         std::cout << std::setfill(' ') << std::setw(18) << std::left;
         std::cout << amount_repr(i) << " # ";
-        
+
         // Print the date of the transaction
         std::cout << std::setfill(' ') << transaction_list_[i].date() << " # ";
-        
+
         // Finally print the description of the transaction
         std::cout << std::setfill(' ') << std::setw(42) << std::left;
         std::cout << transaction_list_[i].description();
         std::cout << "#" << std::endl;
-        
+
     }
     std::cout << std::setfill('#') << std::setw(length) << "#" << std::endl;
 }
